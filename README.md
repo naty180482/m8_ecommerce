@@ -10,6 +10,12 @@
 
 ---
 
+## 🔗 Repositorio
+
+https://github.com/naty180482/m8_ecommerce
+
+---
+
 # Descripción
 
 **M8 Ecommerce** es una aplicación web desarrollada utilizando **Django**, **PostgreSQL** y **Bootstrap 5**, creada como proyecto final del Bootcamp **Desarrollo de Aplicaciones Full Stack Python**.
@@ -22,37 +28,20 @@ El objetivo fue aplicar buenas prácticas de desarrollo, separación entre front
 
 # Vista previa del proyecto
 
-> **Agregar capturas cuando el proyecto esté finalizado**
-
 ## Home
-
-```
-assets/img/home.png
-```
+![Home](assets/img/home.png)
 
 ## Catálogo
-
-```
-assets/img/catalogo.png
-```
+![Catálogo](assets/img/catalogo.png)
 
 ## Carrito
-
-```
-assets/img/carrito.png
-```
+![Carrito](assets/img/carrito.png)
 
 ## Panel Administrador
-
-```
-assets/img/admin.png
-```
+![Admin](assets/img/admin.png)
 
 ## Compra realizada
-
-```
-assets/img/checkout.png
-```
+![Checkout](assets/img/checkout.png)
 
 ---
 
@@ -68,8 +57,6 @@ assets/img/checkout.png
 - Eliminación de productos
 - Confirmación de compra
 - Historial de pedidos
-
----
 
 ## Administrador
 
@@ -99,67 +86,60 @@ assets/img/checkout.png
 ---
 
 # Arquitectura del proyecto
-
-```
 Cliente
-    │
-    ▼
+│
+▼
 Bootstrap
-    │
+│
 Django Templates
-    │
+│
 Views
-    │
+│
 ORM Django
-    │
+│
 PostgreSQL
-```
 
 ---
 
 # Flujo de navegación
-
-```
 Inicio
-   │
-   ▼
+│
+▼
 Login
-   │
-   ▼
+│
+▼
 Catálogo
-   │
-   ▼
+│
+▼
 Detalle Producto
-   │
-   ▼
+│
+▼
 Agregar al carrito
-   │
-   ▼
+│
+▼
 Carrito
-   │
-   ▼
+│
+▼
 Confirmar compra
-   │
-   ▼
+│
+▼
 Pedido registrado
-```
+
 
 ---
 
 # Estructura del proyecto
-
-```
 m8_ecommerce/
 │
 ├── config/
 ├── tienda/
-│   ├── migrations/
-│   ├── templates/
-│   ├── static/
-│   ├── models.py
-│   ├── views.py
-│   ├── forms.py
-│   └── urls.py
+│ ├── migrations/
+│ ├── templates/
+│ ├── static/
+│ ├── models.py
+│ ├── views.py
+│ ├── forms.py
+│ └── urls.py
 │
 ├── templates/
 ├── static/
@@ -168,7 +148,6 @@ m8_ecommerce/
 ├── README.md
 ├── .env.example
 └── manage.py
-```
 
 ---
 
@@ -176,223 +155,54 @@ m8_ecommerce/
 
 ## 1. Clonar el repositorio
 
-```bash
-git clone https://github.com/TU_USUARIO/m8_ecommerce.git
-```
-
-Entrar al proyecto
-
-```bash
+git clone https://github.com/naty180482/m8_ecommerce.git
 cd m8_ecommerce
-```
-
----
-
-## 2. Crear entorno virtual
-
+2. Crear entorno virtual
 Windows
-
-```bash
 python -m venv venv
-
 venv\Scripts\activate
-```
-
 Linux / macOS
 
-```bash
 python3 -m venv venv
-
 source venv/bin/activate
-```
-
----
-
-## 3. Instalar dependencias
-
-```bash
+3. Instalar dependencias
 pip install -r requirements.txt
-```
 
----
-
-## 4. Crear Base de Datos PostgreSQL
-
-```sql
+4. Crear Base de Datos PostgreSQL
 CREATE DATABASE m8_ecommerce_db;
+CREATE USER m8_ecommerce_user WITH PASSWORD 'ClaveSegura.2026#';
+GRANT ALL PRIVILEGES ON DATABASE m8_ecommerce_db TO m8_ecommerce_user;
+ALTER DATABASE m8_ecommerce_db OWNER TO m8_ecommerce_user;
 
-CREATE USER m8_ecommerce_user
-WITH PASSWORD 'ClaveSegura.2026#';
+5. Crear archivo .env
+Tomar como referencia .env.example
 
-GRANT ALL PRIVILEGES
-ON DATABASE m8_ecommerce_db
-TO m8_ecommerce_user;
+Contenido:
 
-ALTER DATABASE m8_ecommerce_db
-OWNER TO m8_ecommerce_user;
-```
-
----
-
-## 5. Crear archivo `.env`
-
-Tomar como referencia
-
-```
-.env.example
-```
-
-Contenido
-
-```env
+env
 SECRET_KEY=TU_SECRET_KEY
-
 DEBUG=True
-
 DB_NAME=m8_ecommerce_db
 DB_USER=m8_ecommerce_user
 DB_PASSWORD=ClaveSegura.2026#
 DB_HOST=localhost
 DB_PORT=5432
-```
 
----
-
-## 6. Ejecutar migraciones
-
-```bash
+6. Ejecutar migraciones
 python manage.py migrate
-```
 
----
-
-## 7. Crear superusuario
-
-```bash
+7. Crear superusuario
 python manage.py createsuperuser
-```
 
----
-
-## 8. Ejecutar servidor
-
-```bash
+8. Ejecutar servidor
 python manage.py runserver
-```
+Abrir: http://127.0.0.1:8000/
 
-Abrir
+Credenciales de prueba
+Administrador
+Usuario: admin
+Contraseña: admin12345
 
-```
-http://127.0.0.1:8000/
-```
-
----
-
-# Credenciales de prueba
-
-## Administrador
-
-```
-Usuario:
-
-admin
-
-Contraseña:
-
-admin12345
-```
-
----
-
-## Cliente
-
-```
-Usuario:
-
-cliente
-
-Contraseña:
-
-cliente12345
-```
-
----
-
-# Rutas principales
-
-| Ruta | Función |
-|------|----------|
-| / | Inicio |
-| /catalogo | Catálogo |
-| /login | Inicio de sesión |
-| /carrito | Carrito |
-| /mis-pedidos | Historial |
-| /panel/productos | CRUD Productos |
-| /admin | Django Admin |
-
----
-
-# Seguridad
-
-Este proyecto utiliza:
-
-- Variables de entorno (`.env`)
-- Protección CSRF
-- Autenticación Django
-- Roles mediante `is_staff`
-- PostgreSQL
-- ORM de Django
-
-No se publican:
-
-- `.env`
-- Base de datos
-- Contraseñas reales
-
----
-
-# Posibles mejoras futuras
-
-- Integración con pasarela de pago.
-- Búsqueda avanzada.
-- Categorías jerárquicas.
-- Wishlist.
-- Sistema de comentarios.
-- Panel de estadísticas.
-- API REST con Django REST Framework.
-- Docker.
-- Despliegue en Render.
-
----
-
-# Aprendizajes obtenidos
-
-Durante este proyecto se aplicaron conocimientos de:
-
-- Arquitectura MVC (MTV en Django)
-- ORM
-- PostgreSQL
-- Bootstrap
-- CRUD
-- Autenticación
-- Control de acceso
-- Git
-- GitHub
-- Buenas prácticas de desarrollo
-
----
-
-# Autor
-## Milton Valdebenito Kelly  
-Ingeniero de Redes e Infraestructura TI  
-Relator Full Stack Python Talento Digital  
-GitHub:
-https://github.com/mvaldebenitokelly  
-LinkedIn: https://linkedin.com/in/miltoncesar 
-
-
----
-
-# Licencia
-
-Proyecto desarrollado con fines educativos como parte del Bootcamp **Desarrollo de Aplicaciones Full Stack Python**.
+Cliente
+Usuario: cliente
+Contraseña: cliente12345
