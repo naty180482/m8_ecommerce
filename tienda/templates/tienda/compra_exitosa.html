@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Compra exitosa | M8 Ecommerce{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+    <div class="card-body text-center">
+        <h1 class="text-success">Compra realizada correctamente</h1>
+        <p class="lead">Tu pedido fue registrado en la base de datos.</p>
+
+        <hr>
+
+        <p><strong>Número de orden:</strong> {{ orden.id }}</p>
+        <p><strong>Fecha:</strong> {{ orden.fecha }}</p>
+        <p><strong>Total:</strong> ${{ orden.total }}</p>
+
+        <a href="{% url 'catalogo' %}" class="btn btn-primary">Volver al catálogo</a>
+        <a href="{% url 'mis_pedidos' %}" class="btn btn-outline-secondary">Ver mis pedidos</a>
+    </div>
+</div>
+
+{% endblock %}

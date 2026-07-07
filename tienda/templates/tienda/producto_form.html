@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }} | M8 Ecommerce{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="h3 mb-4">{{ titulo }}</h1>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        {{ form.categoria.label_tag }}
+                        {{ form.categoria }}
+                        {{ form.categoria.errors }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.nombre.label_tag }}
+                        {{ form.nombre }}
+                        {{ form.nombre.errors }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.descripcion.label_tag }}
+                        {{ form.descripcion }}
+                        {{ form.descripcion.errors }}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.precio.label_tag }}
+                            {{ form.precio }}
+                            {{ form.precio.errors }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            {{ form.stock.label_tag }}
+                            {{ form.stock }}
+                            {{ form.stock.errors }}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.imagen.label_tag }}
+                        {{ form.imagen }}
+                        {{ form.imagen.errors }}
+                    </div>
+
+                    <div class="form-check mb-3">
+                        {{ form.activo }}
+                        {{ form.activo.label_tag }}
+                    </div>
+
+                    <div class="form-check mb-3">
+                        {{ form.destacado }}
+                        {{ form.destacado.label_tag }}
+                    </div>
+
+                    <button class="btn btn-primary">Guardar</button>
+                    <a href="{% url 'admin_productos' %}" class="btn btn-outline-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

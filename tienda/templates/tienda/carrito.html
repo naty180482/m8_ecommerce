@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Carrito | M8 Ecommerce{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">Carrito de compras</h1>
+
+{% if items %}
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle bg-white">
+            <thead class="table-dark">
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.producto.nombre }}</td>
+                        <td>${{ item.precio }}</td>
+                        <td>
+                            <form method="post" action="{% url 'actualizar_carrito' item.producto.id %}" class="d-flex">
+                                {% csrf_token %}
+                                <input type="number" name="cantidad" value="{{ item.cantidad }}" min="1" max="{{ item.producto.stock }}" class="form-control me-2" style="width: 100px;">
+                                <button class="btn btn-sm btn-outline-primary">Actualizar</button>
+                            </form>
+                        </td>
+                        <td>${{ item.subtotal }}</td>
+                        <td>
+                            <a href="{% url 'eliminar_carrito' item.producto.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card ms-auto" style="max-width: 350px;">
+        <div class="card-body">
+            <h4>Total: ${{ total }}</h4>
+            <form method="post" action="{% url 'confirmar_compra' %}">
+                {% csrf_token %}
+                <button class="btn btn-success w-100">Confirmar compra</button>
+            </form>
+        </div>
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        Tu carrito está vacío.
+    </div>
+    <a href="{% url 'catalogo' %}" class="btn btn-primary">Ir al catálogo</a>
+{% endif %}
+
+{% endblock %}

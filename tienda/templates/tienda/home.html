@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio | M8 Ecommerce{% endblock %}
+
+{% block content %}
+
+<section class="hero mb-5">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="display-5 fw-bold">Ecommerce desarrollado con Django</h1>
+            <p class="lead">Proyecto final de portafolio Módulo 8 usando PostgreSQL, Bootstrap y buenas prácticas.</p>
+            <a href="{% url 'catalogo' %}" class="btn btn-light btn-lg">Ver catálogo</a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 class="mb-4">Productos destacados</h2>
+
+    <div class="row g-4">
+        {% for producto in productos_destacados %}
+            <div class="col-md-4">
+                <div class="card card-producto h-100">
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" class="card-img-top producto-img" alt="{{ producto.nombre }}">
+                    {% else %}
+                        <div class="producto-img d-flex align-items-center justify-content-center">
+                            <span class="text-muted">Sin imagen</span>
+                        </div>
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text">{{ producto.descripcion|truncatewords:18 }}</p>
+                        <p class="fw-bold">${{ producto.precio }}</p>
+                        <a href="{% url 'detalle_producto' producto.id %}" class="btn btn-primary">Ver detalle</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No hay productos destacados disponibles.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
